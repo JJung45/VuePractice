@@ -1,22 +1,20 @@
 <template>
     <div>
-        {{msg}}
+        <h2>{{header}}</h2>
     </div>
 </template>
-
 <script>
-    import EventBus from '../main';
-    export default  {
-        data(){
-            return {
-                msg: '',
-                count: 0,
+    import { bus } from '../main';
+    export default {
+        name: 'Test2',
+        props: {
+            header:{
+                type: String
             }
         },
-        created() {
-            EventBus.$on('push-msg', (payload) => {
-                this.msg = payload;
-                this.count++;
+        created (){
+            bus.$on('changeIt', (data) => {
+                this.header = data;
             })
         }
     }

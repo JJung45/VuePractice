@@ -1,29 +1,28 @@
 <template>
     <div>
+        <h1 v-on:click="changeHeader">{{header}}</h1>
+        <p>{{ message }}</p>
     </div>
 </template>
 <script>
+    import { bus } from '../main'
     export default {
-        name: 'Test2',
+        name: 'Test',
+        data() {
+            return {
+                message: '안녕하세요 Vue!'
+            }
+        },
         props: {
-            msg: String
+            header:{
+                type: String
+            }
+        },
+        methods: {
+            changeHeader (){
+                this.header = "changed header";
+                bus.$emit('changeIt', 'changed header');
+            }
         }
     }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-    h3 {
-        margin: 40px 0 0;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: #42b983;
-    }
-</style>
